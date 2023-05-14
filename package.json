@@ -1,12 +1,8 @@
 {
   "dependencies": {
     "gh-pages": "^5.0.0"
-  }
-},
-{
-  "homepage" : "https://distortedspacetime.github.io/Pythonic-club/"
-},
-{
+  },
+  "homepage" : "https://distortedspacetime.github.io/Pythonic-club/",
   "script": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
