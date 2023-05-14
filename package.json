@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "gh-pages": "^5.0.0"
+  },
+  "homepage" : "https://(GitHub ID).github.io/(Repository name)/",
+  "script": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
