@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2차시 활동 내용</title>
-    <img width="900px" src="PYTHONIC_logo.png">
-</head>
 <body>
     <h1>2차시: Python과 TensorFlow의 기초를 공부</h1>
     <p>
@@ -28,6 +19,4 @@
             </li>
         </ol>
     </p>
-    <input type="button" value="돌아가기" onclick="location.href='index.html'">
 </body>
-</html>
