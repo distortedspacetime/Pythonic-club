@@ -3,25 +3,7 @@ const fs = require('fs');
 const url = require('url');
 const qs = require('querystring');
 const path = require('path');
-
-function templateHTML(title, body, control){
-    return `
-    <!DOCTYPE html>
-    <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${title}</title>
-    </head>
-    <body>
-        <img width="900px" src="img/PYTHONIC_logo.png">
-        ${body}
-        ${control}
-    </body>
-    </html>
-    `;                                                
-}
+var template = require('./lib/template.js');
 
 const app = http.createServer((request, response) => {
     const _url = request.url;
@@ -30,14 +12,7 @@ const app = http.createServer((request, response) => {
     if(pathname === '/'){
         if(queryData.get('id') == undefined){     
             fs.readdir('./data', (error, filelist) => {
-                var list = '<ul>';
-                var i = 0;
-                while(i < filelist.length){
-                    list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-                    i = i + 1;
-                }
-                list = list+'</ul>';
-
+                var list = template.List(filelist);
                 var title = 'Pythonic Record';
                 var description = `
                 <p>
@@ -63,17 +38,17 @@ const app = http.createServer((request, response) => {
                         </li>
                     </ul>
                 </p>`;
-                var template = templateHTML(title, description, '');
+                var templateHTML = template.HTML(title, description, '');
                 
             response.writeHead(200);
-            response.end(template);
+            response.end(templateHTML);
             });
         } else {
             fs.readdir('./data', function(error, filelist){
                 var filteredId = path.parse(queryData.get('id')).base;
                 fs.readFile(`data/${filteredId}`, 'utf8', (err, description) => {
                     var title = path.parse(queryData.get('id')).name;
-                    var html = templateHTML(title, description, `<input type="button" value="돌아가기" onclick="location.href='http://localhost:3000';">`);
+                    var html = template.HTML(title, description, `<input type="button" value="돌아가기" onclick="location.href='http://localhost:3000';">`);
                     response.writeHead(200);
                     response.end(html);
                 });

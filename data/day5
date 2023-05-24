@@ -1,0 +1,16 @@
+<body>
+    <h1>5차시: 실물 아두이노 조지기</h1>
+    <p>
+        <ul>
+            <li>
+                아두이노 구성품 확인 및 간단한 실습
+                <ul>
+                <li>아두이노를 노트북에 연결하여 아두이노에 불이 들어오게 함.</li>
+                </ul>
+            </li>
+        </ul>
+        <img width="300px" src="https://gcdaeseong-h.gne.go.kr/upload/editor/20230419/IMG_141950.jpg"/>
+        <img width="300px" src="https://gcdaeseong-h.gne.go.kr/upload/editor/20230419/IMG_142124.jpg"/>
+        <img width="300px" src="https://gcdaeseong-h.gne.go.kr/upload/editor/20230419/IMG_142204.jpg"/>
+    </p>
+</body>

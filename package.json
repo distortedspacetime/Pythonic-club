@@ -1,15 +1,10 @@
 {
+  "dependencies": {
+    "node": "^20.2.0"
+  },
+  "homepage": "https://distortedspacetime.github.io/Pythonic-club/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "homepage": "https://distortedspacetime.github.io/Pythonic-club/",
-  "dependencies": {
-    "build": "^0.1.4",
-    "gh-pages": "^5.0.0",
-    "webpack": "^5.82.1"
-  },
-  "devDependencies": {
-    "webpack-cli": "^5.1.1"
   }
 }
