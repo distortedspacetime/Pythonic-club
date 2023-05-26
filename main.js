@@ -3,7 +3,7 @@ const fs = require('fs');
 const url = require('url');
 const qs = require('querystring');
 const path = require('path');
-var template = require('./lib/template.js');
+var template = require('./template.js');
 
 const app = http.createServer((request, response) => {
     const _url = request.url;
@@ -48,7 +48,7 @@ const app = http.createServer((request, response) => {
                 var filteredId = path.parse(queryData.get('id')).base;
                 fs.readFile(`data/${filteredId}`, 'utf8', (err, description) => {
                     var title = path.parse(queryData.get('id')).name;
-                    var html = template.HTML(title, description, `<input type="button" value="돌아가기" onclick="location.href='http://localhost:3000';">`);
+                    var html = template.HTML(title, description, `<a href="http://localhost:3000">돌아가기</a>`);
                     response.writeHead(200);
                     response.end(html);
                 });
