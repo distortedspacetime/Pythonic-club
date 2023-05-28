@@ -1,5 +1,19 @@
 {
-  "dependencies": {
-    "node": "^20.2.0"
-  } 
+  "name": "pythonic-club",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/distortedspacetime/Pythonic-club.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/distortedspacetime/Pythonic-club/issues"
+  },
+  "homepage": "https://github.com/distortedspacetime/Pythonic-club#readme"
 }
