@@ -14,30 +14,33 @@ const app = http.createServer((request, response) => {
             fs.readdir('./data', (error, filelist) => {
                 var list = template.List(filelist);
                 var title = 'Pythonic Record';
-                var description = `
-                <p>
-                    <ul>
+                var description = `<div>
+                    <ul style="list-style-type: none;">
                         <li><h2>학습 내용</h2></li>
                     </ul>
-                    <h3>
-                        <ol>
-                            ${list}
-                        </ol>
-                    </h3>
-                </p>
-                <p>
-                    <ul>
-                        <li>조장: 1311 손기원</li>
-                        <li>조원: 1102 김동휘<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1108 문태조<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1131 안형준<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1403 김세진<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1508 박성완<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1524 허지환<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1606 박영민
-                        </li>
-                    </ul>
-                </p>`;
+            <div class="description">
+                <div style="display: box;">
+                    <ol>
+                        ${list}
+                    </ol>
+                </div>
+                <div class="names">
+                    조장:<br>
+                    조원:<br>
+                </div>
+                <div class="names">
+                    손기원<br>
+                    김세진<br>
+                    문태조<br>
+                    박성완<br>
+                    박영민<br>
+                    김동휘<br>
+                    안형준<br>
+                    허지환
+                </div>
+                </div>
+                </div>
+                `;
                 var templateHTML = template.HTML(title, description, '<a href="/create">작성</a>');
                 
             response.writeHead(200);
@@ -63,7 +66,10 @@ const app = http.createServer((request, response) => {
                     <label for="date" style="margin-top: 5px;">날짜</label>
                     <input type="date" id="date" name="date" required>
                 </div>
-
+                <div class="form-group">
+                    <label for="period">차시</label>
+                    <textarea type="text" id="period" name="period" required></textarea>
+                </div>
                 <div class="form-group">
                     <label for="activity6">활동내역(1)-6교시</label>
                     <textarea type="text" id="activity6" name="activity6" required></textarea>
@@ -129,6 +135,7 @@ const app = http.createServer((request, response) => {
         request.on("end", () => {
             const post = qs.parse(body);
             const date = post.date;
+            const period = post.period;
             const activity6 = post.activity6;
             const activity7 = post.activity7;
             const name1 = post.name1;
@@ -139,27 +146,28 @@ const app = http.createServer((request, response) => {
             const name6 = post.name6;
             const name7 = post.name7;
             const name8 = post.name8;
-            const description = `
-            <h1>${date}</h1>
-            <p>
-                <h3>활동 내용</h3>
-                <ol>
-                    <li>${activity6}</li>
-                    <li>${activity7}</li>
-                </ol>
-                <h3>소감</h3>
-                <ol>
-                    <li>김동휘: ${name1}</li>
-                    <li>김세진: ${name2}</li>
-                    <li>문태조: ${name3}</li>
-                    <li>박성완: ${name4}</li>
-                    <li>박영민: ${name5}</li>
-                    <li>손기원: ${name6}</li>
-                    <li>안형준: ${name7}</li>
-                    <li>허지환: ${name8}</li>
-                </ol>
-            </p>
-            `
+            const description = `<body>
+    <h1>${period}</h1>
+    <p>
+        <h3>활동 내용</h3>
+        <ol>
+            <li>${activity6}</li>
+            <li>${activity7}</li>
+        </ol>
+        <h3>소감</h3>
+        <ol>
+            <li>김동휘: ${name1}</li>
+            <li>김세진: ${name2}</li>
+            <li>문태조: ${name3}</li>
+            <li>박성완: ${name4}</li>
+            <li>박영민: ${name5}</li>
+            <li>손기원: ${name6}</li>
+            <li>안형준: ${name7}</li>
+            <li>허지환: ${name8}</li>
+        </ol>
+    </p>
+</body>
+            `;
             fs.writeFile(`data/${date}`, description, 'utf8', (err) => {
                 console.log(description);
                 response.writeHead(302, {location: `/?id=${date}`});

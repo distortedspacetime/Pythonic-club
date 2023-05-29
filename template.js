@@ -63,11 +63,15 @@ module.exports = {
         .control {
             margin-left: 14%;
             margin-bottom: 20px;
-            width: 100px;
+            width: 85px;
             background: white;
-            color: black;
-            border-radius: 5px;
+            border-radius: 20px;
             text-align: center;
+        }
+        .control a{
+            text-decoration: none;
+            font-size: medium;
+            color: black;
         }
         .form-group {
             margin-bottom: 10px;
@@ -86,6 +90,44 @@ module.exports = {
         }
         .submit_button {
             margin-bottom: 10px;
+        }
+        .description {
+            display: grid;
+            grid-template-columns: 8fr 0.5fr 2fr;
+        }
+        .filelist {
+            display: block;
+        }
+        .list_item {
+            display: block;
+            background-color: rgba(254, 254, 254, 100);
+            margin-bottom: 20px;
+            margin-left:-10px;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            padding-top: 7.5px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 5px gray;
+            height: 50px;
+            max-width: 80%;
+        }
+        .list_item a{
+            text-decoration: none;
+            color: black;
+            font-size: medium;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .list_lines h1{
+            color: gray;
+            font-size: 11px;
+            text-align: left;
+            margin-left: 10px;
+            margin-top: 3px;
+        }
+        .names {
+            display: box;
+            margin-top: 20px;
         }
     </style>
     <body>
@@ -106,14 +148,17 @@ module.exports = {
     `
     ),
 
-    List:((filelist) => {
-        var list = '<ul>';
-        var i = 0;
-        while(i < filelist.length){
-            list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-            i = i + 1;
-        }
-        list = list+'</ul>';
-        return list;
+    List: ((filelist) => {
+    const fs = require('fs');
+
+    var list = '<nav class="filelist">';
+    var i = 0;
+    while (i < filelist.length) {
+        const lines = fs.readFileSync(`data/${filelist[i]}`, 'utf8').split('\n');
+        list = list + `<nav class="list_item"><a href="/?id=${filelist[i]}">${filelist[i]}</a><a class="list_lines" href="/?id=${filelist[i]}">${lines[1]}</a></nav>`;
+        i = i + 1;
+    }
+    list = list + '</nav>';
+    return list;
     })
 }
